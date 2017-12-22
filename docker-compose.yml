@@ -46,3 +46,15 @@ grafana-ui:
   links:
     - prometheus-server:prometheus
 
+
+##############
+# Kubernetes #
+##############
+
+# Convert docker-compose file to kubernetes: https://kubernetes.io/docs/tools/kompose/user-guide/
+# For each service, it will create 2 files: *-service.yaml and *-deployment.yaml
+# See https://kubernetes.io/docs/concepts/services-networking/service/ and https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+# Install minikube:
+# - https://kubernetes.io/docs/tasks/tools/install-minikube/
+# - or https://gist.github.com/osowski/adce22b01fadd6e2bc3331c066d7d612
