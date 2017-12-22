@@ -28,8 +28,10 @@ scrape_configs:
     scrape_timeout: 5s
 
     static_configs:
-      - targets: ['cadvisor:9080']
+      - targets: ['cadvisor:8080']
 
+  # When running Docker natively on Linux, you can access host services using the IP address of the docker0 interface (Docker's default bridge network).
+  # The IP address is 172.17.0.1
   - job_name: 'opendj0'
 
     scrape_interval: 10s
@@ -37,7 +39,7 @@ scrape_configs:
     metrics_path: /metrics/prometheus
 
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: ['172.17.0.1:8080']
 
   - job_name: 'opendj1'
 
@@ -46,4 +48,16 @@ scrape_configs:
     metrics_path: /metrics/prometheus
 
     static_configs:
-      - targets: ['localhost:8081']
+      - targets: ['172.17.0.1:8081']
+
+###############
+# Data source #
+###############
+# For the moment, need to manually add a Prometheus data source named "Prometheus DJ" with URL "http://prometheus:9090"
+# See "Adding datasource without using the web gui" at https://github.com/grafana/grafana/issues/1789
+# http://docs.grafana.org/http_api/data_source/
+
+#############
+# Dashboard #
+#############
+# http://docs.grafana.org/http_api/dashboard/
