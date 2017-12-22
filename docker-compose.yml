@@ -1,3 +1,10 @@
+# This stack for docker-compose is based on https://github.com/robtec/prometheus-grafana
+
+# https://github.com/google/cadvisor
+# cAdvisor (Container Advisor) provides container users an understanding of the resource usage and performance characteristics of their running containers.
+# It is a running daemon that collects, aggregates, processes, and exports information about running containers.
+# Specifically, for each container it keeps resource isolation parameters, historical resource usage, histograms of complete historical resource usage and network statistics.
+# This data is exported by container and machine-wide.
 cadvisor:
   image: google/cadvisor
   ports:
@@ -8,11 +15,16 @@ cadvisor:
     - /sys:/sys:ro
     - /var/lib/docker:/var/lib/docker:ro
 
+# https://github.com/prometheus/pushgateway
+# The Prometheus Pushgateway exists to allow ephemeral and batch jobs to expose their metrics to Prometheus.
+# Since these kinds of jobs may not exist long enough to be scraped, they can instead push their metrics to a Pushgateway.
+# The Pushgateway then exposes these metrics to Prometheus.
 metrics-gateway:
   image: prom/pushgateway
   ports:
     - 9091:9091
 
+# https://github.com/prometheus/prometheus/blob/master/Dockerfile
 prometheus-server:
   image: prom/prometheus
   ports:
@@ -23,6 +35,8 @@ prometheus-server:
   volumes:
     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
+# https://github.com/grafana/grafana-docker
+# can install plugin via the "GF_INSTALL_PLUGINS" env variable
 grafana-ui:
   image: grafana/grafana
   ports:
@@ -31,3 +45,4 @@ grafana-ui:
     - GF_SECURITY_ADMIN_PASSWORD=secret
   links:
     - prometheus-server:prometheus
+
