@@ -30,8 +30,11 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-  # When running Docker natively on Linux, you can access host services using the IP address of the docker0 interface (Docker's default bridge network).
-  # The IP address is 172.17.0.1
+  # When running Docker, you can access host services using the IP address of the docker0 interface (Docker's default bridge network).
+  # The IP address to use to access the host is:
+  # - '172.17.0.1' for linux
+  # - 'docker.for.mac.host.internal' for Mac
+
   - job_name: 'opendj0'
 
     scrape_interval: 10s
