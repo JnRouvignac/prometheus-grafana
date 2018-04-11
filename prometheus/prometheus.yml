@@ -41,6 +41,10 @@ scrape_configs:
     scrape_timeout: 5s
     metrics_path: /metrics/prometheus
 
+    basic_auth:
+      username: 'monitor'
+      password: 'password'
+
     static_configs:
       - targets: ['172.17.0.1:8080']
 
@@ -49,6 +53,10 @@ scrape_configs:
     scrape_interval: 10s
     scrape_timeout: 5s
     metrics_path: /metrics/prometheus
+
+    basic_auth:
+      username: 'monitor'
+      password: 'password'
 
     static_configs:
       - targets: ['172.17.0.1:8081']
